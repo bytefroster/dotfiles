@@ -140,3 +140,14 @@ alias gs='git status'
 alias ga='git add .'
 alias gc='git commit -m'
 alias gp='git push'
+# FREEZER (backup system)
+freeze() {
+    cp ~/.zshrc ~/dotfiles/
+    cp ~/.p10k.zsh ~/dotfiles/ 2>/dev/null
+
+    cd ~/dotfiles || return
+
+    git add .
+    git commit -m "update $(date)" || echo "no changes"
+    git push
+}

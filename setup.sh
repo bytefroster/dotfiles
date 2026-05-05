@@ -1,5 +1,5 @@
 #!/bin/bash
-
+set -e
 echo "[+] Updating system..."
 sudo apt update && sudo apt upgrade -y
 
@@ -13,10 +13,11 @@ echo "[+] Installing Powerlevel10k..."
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 
 echo "[+] Restoring config..."
-cp .zshrc ~/
-cp .p10k.zsh ~/ 2>/dev/null
+DIR="$(cd "$(dirname "$0")" && pwd)"
 
+cp "$DIR/.zshrc" ~/
+cp "$DIR/.p10k.zsh" ~/ 2>/dev/null
 echo "[+] Setting default shell..."
-chsh -s $(which zsh)
+chsh -s /usr/bin/zsh
 
 echo "[+] Done"
